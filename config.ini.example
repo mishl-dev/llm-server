@@ -7,5 +7,3 @@ cache-type-v = q8_0
 top-k = 20
 min-p = 0.0
 chat-template-file = /chat_template.jinja
-cache-type-k = q4_0
-cache-type-v = q4_0
