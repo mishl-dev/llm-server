@@ -1,0 +1,43 @@
+services:
+  llama-router:
+    image: ghcr.io/ggml-org/llama.cpp:server-cuda
+    container_name: llama.cpp-router
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
+    environment:
+      - CUDA_VISIBLE_DEVICES=0
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./chat_template.jinja:/chat_template.jinja
+      - ./models:/models
+      - ./config.ini:/config.ini
+      - ./logs:/var/log/llama
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    entrypoint:
+      - "./llama-server"
+      - "--models-preset"
+      - "/config.ini"
+      - "--models-max"
+      - "1"
+      - "--sleep-idle-seconds"
+      - "600"
+      - "--threads"
+      - "8"
+      - "--threads-batch"
+      - "16"
+      - "--batch-size"
+      - "512"
+      - "--host"
+      - "0.0.0.0"
+      - "--port"
+      - "8080"
