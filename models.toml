@@ -1,0 +1,11 @@
+[global]
+n-gpu-layers = -1
+flash-attn = true
+sleep-idle-seconds = 600
+cache-type-k = "q8_0"
+cache-type-v = "q8_0"
+
+[[models]]
+name = "gemma4-v2"
+repo = "yuxinlu1/gemma-4-12B-agentic-fable5-composer2.5-v2-3.5x-tau2-GGUF"
+file = "gemma4-v2-Q4_K_M.gguf"

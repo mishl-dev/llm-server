@@ -9,4 +9,7 @@ down:
 logs:
     docker compose logs -f
 
+sync:
+    ./docker-entrypoint.sh --sync
+
 restart: down up

@@ -1,3 +1,5 @@
-models/
-logs
+models/*
+!models/.gitkeep
+
 config.ini
+logs

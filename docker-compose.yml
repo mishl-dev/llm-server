@@ -14,9 +14,9 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - ./chat_template.jinja:/chat_template.jinja
       - ./models:/models
-      - ./config.ini:/config.ini
+      - ./models.toml:/models.toml
+      - ./docker-entrypoint.sh:/entrypoint.sh
       - ./logs:/var/log/llama
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
@@ -24,21 +24,4 @@ services:
       timeout: 5s
       retries: 3
     entrypoint:
-      - "./llama-server"
-      - "--models-preset"
-      - "/config.ini"
-      - "--models-max"
-      - "1"
-      - "--sleep-idle-seconds"
-      - "600"
-      - "--threads"
-      - "8"
-      - "--threads-batch"
-      - "16"
-      - "--batch-size"
-      - "512"
-      - "--host"
-      - "0.0.0.0"
-      - "--port"
-      - "8080"
-      - "--verbose"
+      - "/entrypoint.sh"
