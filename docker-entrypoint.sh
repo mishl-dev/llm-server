@@ -151,4 +151,4 @@ done
 
 [ "$SYNC" = 1 ] && { echo "✓  Sync complete"; exit 0; }
 
-exec ./llama-server --models-preset /config.ini --jinja --no-mmap -fa on --sleep-idle-seconds 600 --threads 8 --threads-batch 16 --batch-size 512 --host 0.0.0.0 --port 8080 --verbose
+exec ./llama-server --model /models/ornith-1.0-9b-Q4_K_M.gguf --no-mmap -fa on --sleep-idle-seconds 600 --threads 8 --threads-batch 16 --batch-size 512 --host 127.0.0.1 --port 8080 --verbose
